@@ -1,7 +1,3 @@
-# Sales-insights-ai
-Sistema de IA para análise de vendas com FastAPI, LangChain e OpenAI
-# Sales Insights AI
-
 **Desenvolvido por:** João Gabriel de Araujo Diniz
 
 Sistema inteligente de análise de vendas utilizando IA generativa com FastAPI, LangChain e OpenAI GPT.
