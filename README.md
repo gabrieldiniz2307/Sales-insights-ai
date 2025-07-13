@@ -203,11 +203,5 @@ Contribuições são bem-vindas! Veja como:
 📄 Licença
 Este projeto está sob a licença MIT. Veja LICENSE para detalhes.
 🌟 Se este projeto foi útil, deixe uma ⭐!
-Desenvolvido com ❤️ por João Gabriel de Araujo Diniz
-LinkedIn
-
-GitHub
-
-Portfolio
-"Transformando dados em insights através da inteligência artificial" 🚀
+Desenvolvido por João Gabriel de Araujo Diniz
 
