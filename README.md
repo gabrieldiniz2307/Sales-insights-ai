@@ -16,12 +16,6 @@
 
 ---<img width="1890" height="908" alt="Captura de tela 2025-07-13 190521" src="https://github.com/user-attachments/assets/89cd8eac-8924-41ca-88a7-daf6a7c57848" />
 
-<div align="center">
-  <img src="https://ibb.co/yBnSBfSx" alt="Sales Insights AI - Interface Principal" width="800"/>
-  <p><em>Dashboard moderno com assistente IA para análise de vendas em tempo real</em></p>
-</div>
-</div>
-
 ## 📋 Índice
 
 - [🎯 Sobre o Projeto](#-sobre-o-projeto)
