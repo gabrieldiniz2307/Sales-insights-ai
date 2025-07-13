@@ -17,7 +17,7 @@
 
 ![Demo](https://via.placeholder.com/800x400/1a1a1a/ffffff?text=🧠+Sales+Insights+AI+Demo )
 
-</div>
+
 
 ## 📋 Índice
 
@@ -44,9 +44,6 @@ O **Sales Insights AI** é uma solução completa que revoluciona a análise de 
 
 ## ✨ Funcionalidades
 
-<table>
-<tr>
-<td width="50%">
 
 ### 🧠 Inteligência Artificial
 - ✅ Chat com IA para análise de vendas
@@ -206,7 +203,6 @@ Contribuições são bem-vindas! Veja como:
 🔄 Abra um Pull Request
 📄 Licença
 Este projeto está sob a licença MIT. Veja LICENSE para detalhes.
-<div align="center">
 🌟 Se este projeto foi útil, deixe uma ⭐!
 Desenvolvido com ❤️ por João Gabriel de Araujo Diniz
 LinkedIn
