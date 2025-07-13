@@ -15,8 +15,10 @@
 
 *Sistema profissional que combina FastAPI, LangChain e OpenAI GPT para análise inteligente de dados de vendas*
 
-(https://ibb.co/yBnSBfSx)
-
+<div align="center">
+  <img src="https://ibb.co/yBnSBfSx" alt="Sales Insights AI - Interface Principal" width="800"/>
+  <p><em>Dashboard moderno com assistente IA para análise de vendas em tempo real</em></p>
+</div>
 </div>
 
 ## 📋 Índice
