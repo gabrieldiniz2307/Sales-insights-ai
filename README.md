@@ -215,4 +215,4 @@ GitHub
 
 Portfolio
 "Transformando dados em insights através da inteligência artificial" 🚀
-</div> ```
+
