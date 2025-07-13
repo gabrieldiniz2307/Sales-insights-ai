@@ -207,7 +207,7 @@ Contribuições são bem-vindas! Veja como:
 📄 Licença
 Este projeto está sob a licença MIT. Veja LICENSE para detalhes.
 <div align="center">
-🌟 Se este projeto foi útil, deixe uma ⭐!
+
 Desenvolvido com  por João Gabriel de Araujo Diniz
 
 </div> ```
