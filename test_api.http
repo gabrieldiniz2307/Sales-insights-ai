@@ -1,0 +1,39 @@
+### Sales Insights AI - API Testing
+### Desenvolvido por: João Gabriel de Araujo Diniz
+
+### Health Check
+GET http://localhost:8000/health
+
+### System Status
+GET http://localhost:8000/system-status
+
+### Sales Insights - Resumo Geral
+GET http://localhost:8000/sales-insights?question=Mostre um resumo executivo das vendas
+
+### Sales Insights - Produtos Mais Vendidos
+GET http://localhost:8000/sales-insights?question=Qual foi o produto mais vendido no último mês?
+
+### Sales Insights - Análise de Clientes
+GET http://localhost:8000/sales-insights?question=Faça uma análise dos melhores clientes
+
+### Sales Insights - Tendências
+GET http://localhost:8000/sales-insights?question=Analise as tendências de crescimento das vendas
+
+### Top Products Endpoint
+GET http://localhost:8000/top-products?limit=5
+
+### Top Products - Mais Produtos
+GET http://localhost:8000/top-products?limit=10
+
+### API Documentation
+GET http://localhost:8000/api-documentation
+
+### Swagger UI (abrir no navegador)
+GET http://localhost:8000/docs
+
+### ReDoc (abrir no navegador)
+GET http://localhost:8000/redoc
+
+### Interface Principal (abrir no navegador)
+GET http://localhost:8000/
+

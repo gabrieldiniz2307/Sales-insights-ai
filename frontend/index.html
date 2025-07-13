@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Insights AI - Análise Inteligente de Vendas</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Particles.js for background effects -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    
+    <style>
+        :root {
+            --primary-color: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary-color: #8b5cf6;
+            --accent-color: #06b6d4;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --error-color: #ef4444;
+            --dark-bg: #0f172a;
+            --dark-surface: #1e293b;
+            --dark-surface-2: #334155;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-muted: #64748b;
+            --border-color: #334155;
+            --glass-bg: rgba(30, 41, 59, 0.8);
+            --glass-border: rgba(148, 163, 184, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        /* Glass morphism effect */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .logo i {
+            font-size: 2rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pulse 2s infinite;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--glass-bg);
+            border-radius: 50px;
+            font-size: 0.875rem;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--success-color);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 6rem 2rem 2rem;
+            min-height: 100vh;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--text-primary), var(--primary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        /* Dashboard Grid */
+        .dashboard {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .dashboard-card {
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.1);
+        }
+
+        .dashboard-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        /* AI Chat Interface */
+        .ai-chat {
+            grid-column: 1 / -1;
+            padding: 2rem;
+        }
+
+        .chat-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .chat-avatar {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            animation: pulse 2s infinite;
+        }
+
+        .chat-info h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .chat-info p {
+            color: var(--text-secondary);
+        }
+
+        .chat-container {
+            background: var(--dark-surface);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            min-height: 300px;
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid var(--border-color);
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        .message.user {
+            text-align: right;
+        }
+
+        .message-content {
+            display: inline-block;
+            padding: 1rem 1.5rem;
+            border-radius: 20px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+
+        .message.user .message-content {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+        }
+
+        .message.ai .message-content {
+            background: var(--dark-surface-2);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .input-container {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .input-wrapper {
+            flex: 1;
+            position: relative;
+        }
+
+        .chat-input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            background: var(--dark-surface);
+            border: 2px solid var(--border-color);
+            border-radius: 50px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .send-btn {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .send-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        .send-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* Chart Container */
+        .chart-container {
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 400px;
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 1rem;
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .loading-dots {
+            display: flex;
+            gap: 0.25rem;
+        }
+
+        .loading-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            animation: loadingDots 1.4s infinite ease-in-out;
+        }
+
+        .loading-dot:nth-child(1) { animation-delay: -0.32s; }
+        .loading-dot:nth-child(2) { animation-delay: -0.16s; }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @keyframes loadingDots {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header {
+                padding: 1rem;
+            }
+
+            .container {
+                padding: 5rem 1rem 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .message-content {
+                max-width: 90%;
+            }
+        }
+
+        /* Utility Classes */
+        .hidden { display: none; }
+        .text-center { text-align: center; }
+        .mb-2 { margin-bottom: 0.5rem; }
+        .mb-4 { margin-bottom: 1rem; }
+        .mt-4 { margin-top: 1rem; }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div id="particles-js"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-brain"></i>
+                <span>Sales Insights AI</span>
+            </div>
+            <div class="status-indicator">
+                <div class="status-dot"></div>
+                <span id="status-text">Sistema Online</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Análise Inteligente de Vendas</h1>
+            <p>Transforme seus dados de vendas em insights poderosos com inteligência artificial avançada</p>
+        </section>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card glass">
+                <div class="stat-value" id="total-sales">-</div>
+                <div class="stat-label">Total de Vendas</div>
+            </div>
+            <div class="stat-card glass">
+                <div class="stat-value" id="total-revenue">-</div>
+                <div class="stat-label">Receita Total</div>
+            </div>
+            <div class="stat-card glass">
+                <div class="stat-value" id="total-products">-</div>
+                <div class="stat-label">Produtos</div>
+            </div>
+            <div class="stat-card glass">
+                <div class="stat-value" id="total-customers">-</div>
+                <div class="stat-label">Clientes</div>
+            </div>
+        </div>
+
+        <!-- Dashboard Grid -->
+        <div class="dashboard">
+            <!-- AI Chat Interface -->
+            <div class="ai-chat glass">
+                <div class="chat-header">
+                    <div class="chat-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="chat-info">
+                        <h3>Assistente IA de Vendas</h3>
+                        <p>Faça perguntas sobre seus dados de vendas</p>
+                    </div>
+                </div>
+                
+                <div class="chat-container" id="chat-container">
+                    <div class="message ai">
+                        <div class="message-content">
+                            👋 Olá! Sou seu assistente de análise de vendas. Posso ajudar você a entender seus dados de vendas. Experimente perguntar:
+                            <br><br>
+                            • "Qual foi o produto mais vendido no último mês?"
+                            • "Mostre um resumo das vendas"
+                            • "Qual é a receita total?"
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="input-container">
+                    <div class="input-wrapper">
+                        <input type="text" class="chat-input" id="chat-input" 
+                               placeholder="Digite sua pergunta sobre vendas..." 
+                               maxlength="500">
+                    </div>
+                    <button class="send-btn" id="send-btn">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Top Products Chart -->
+            <div class="chart-container glass">
+                <div class="card-header">
+                    <h3 class="card-title">Top Produtos</h3>
+                    <div class="card-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="topProductsChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // API Base URL
+        const API_BASE = window.location.origin;
+
+        // Initialize particles background
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: '#6366f1' },
+                shape: { type: 'circle' },
+                opacity: { value: 0.1, random: false },
+                size: { value: 3, random: true },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: '#6366f1',
+                    opacity: 0.1,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: 'none',
+                    random: false,
+                    straight: false,
+                    out_mode: 'out',
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: { enable: true, mode: 'repulse' },
+                    onclick: { enable: true, mode: 'push' },
+                    resize: true
+                }
+            },
+            retina_detect: true
+        });
+
+        // DOM Elements
+        const chatContainer = document.getElementById('chat-container');
+        const chatInput = document.getElementById('chat-input');
+        const sendBtn = document.getElementById('send-btn');
+        const statusText = document.getElementById('status-text');
+
+        // Stats elements
+        const totalSalesEl = document.getElementById('total-sales');
+        const totalRevenueEl = document.getElementById('total-revenue');
+        const totalProductsEl = document.getElementById('total-products');
+        const totalCustomersEl = document.getElementById('total-customers');
+
+        // Chart variables
+        let topProductsChart = null;
+
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            loadDashboardData();
+            setupEventListeners();
+            checkAPIStatus();
+        });
+
+        function setupEventListeners() {
+            sendBtn.addEventListener('click', sendMessage);
+            chatInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    sendMessage();
+                }
+            });
+        }
+
+        async function checkAPIStatus() {
+            try {
+                const response = await fetch(`${API_BASE}/health`);
+                if (response.ok) {
+                    statusText.textContent = 'Sistema Online';
+                } else {
+                    statusText.textContent = 'Sistema com Problemas';
+                }
+            } catch (error) {
+                statusText.textContent = 'Sistema Offline';
+                console.error('API Status Error:', error);
+            }
+        }
+
+        async function loadDashboardData() {
+            try {
+                // Load summary stats
+                const summaryResponse = await fetch(`${API_BASE}/sales/summary`);
+                if (summaryResponse.ok) {
+                    const summary = await summaryResponse.json();
+                    updateStats(summary);
+                }
+
+                // Load top products for chart
+                const topProductsResponse = await fetch(`${API_BASE}/top-products`);
+                if (topProductsResponse.ok) {
+                    const topProducts = await topProductsResponse.json();
+                    createTopProductsChart(topProducts.products);
+                }
+            } catch (error) {
+                console.error('Error loading dashboard data:', error);
+                addMessage('ai', '❌ Erro ao carregar dados do dashboard. Verifique a conexão com a API.');
+            }
+        }
+
+        function updateStats(summary) {
+            totalSalesEl.textContent = summary.total_sales.toLocaleString('pt-BR');
+            totalRevenueEl.textContent = `R$ ${summary.total_revenue.toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
+            totalProductsEl.textContent = summary.total_products.toLocaleString('pt-BR');
+            totalCustomersEl.textContent = summary.total_customers.toLocaleString('pt-BR');
+        }
+
+        function createTopProductsChart(products) {
+            const ctx = document.getElementById('topProductsChart').getContext('2d');
+            
+            if (topProductsChart) {
+                topProductsChart.destroy();
+            }
+
+            const labels = products.slice(0, 5).map(p => p.name);
+            const data = products.slice(0, 5).map(p => p.total_quantity);
+
+            topProductsChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Quantidade Vendida',
+                        data: data,
+                        backgroundColor: [
+                            'rgba(99, 102, 241, 0.8)',
+                            'rgba(139, 92, 246, 0.8)',
+                            'rgba(6, 182, 212, 0.8)',
+                            'rgba(16, 185, 129, 0.8)',
+                            'rgba(245, 158, 11, 0.8)'
+                        ],
+                        borderColor: [
+                            'rgba(99, 102, 241, 1)',
+                            'rgba(139, 92, 246, 1)',
+                            'rgba(6, 182, 212, 1)',
+                            'rgba(16, 185, 129, 1)',
+                            'rgba(245, 158, 11, 1)'
+                        ],
+                        borderWidth: 2,
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(148, 163, 184, 0.1)'
+                            },
+                            ticks: {
+                                color: '#cbd5e1'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#cbd5e1',
+                                maxRotation: 45
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        async function sendMessage() {
+            const message = chatInput.value.trim();
+            if (!message) return;
+
+            // Disable input while processing
+            chatInput.disabled = true;
+            sendBtn.disabled = true;
+
+            // Add user message
+            addMessage('user', message);
+            chatInput.value = '';
+
+            // Add loading message
+            const loadingId = addMessage('ai', '<div class="loading">Analisando dados <div class="loading-dots"><div class="loading-dot"></div><div class="loading-dot"></div><div class="loading-dot"></div></div></div>');
+
+            try {
+                const response = await fetch(`${API_BASE}/sales-insights?question=${encodeURIComponent(message)}`);
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    removeMessage(loadingId);
+                    addMessage('ai', data.answer);
+                } else {
+                    removeMessage(loadingId);
+                    addMessage('ai', '❌ Erro ao processar sua pergunta. Tente novamente.');
+                }
+            } catch (error) {
+                removeMessage(loadingId);
+                addMessage('ai', '❌ Erro de conexão. Verifique se a API está funcionando.');
+                console.error('Error sending message:', error);
+            }
+
+            // Re-enable input
+            chatInput.disabled = false;
+            sendBtn.disabled = false;
+            chatInput.focus();
+        }
+
+        function addMessage(type, content) {
+            const messageId = 'msg-' + Date.now();
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${type}`;
+            messageDiv.id = messageId;
+            messageDiv.innerHTML = `<div class="message-content">${content}</div>`;
+            
+            chatContainer.appendChild(messageDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+            
+            return messageId;
+        }
+
+        function removeMessage(messageId) {
+            const messageEl = document.getElementById(messageId);
+            if (messageEl) {
+                messageEl.remove();
+            }
+        }
+
+        // Auto-refresh data every 30 seconds
+        setInterval(loadDashboardData, 30000);
+    </script>
+</body>
+</html>
+
