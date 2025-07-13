@@ -15,7 +15,8 @@
 
 *Sistema profissional que combina FastAPI, LangChain e OpenAI GPT para análise inteligente de dados de vendas*
 
-![Demo](https://via.placeholder.com/800x400/1a1a1a/ffffff?text=🧠+Sales+Insights+AI+Demo )
+![Sales Insights AI Demo](images/dashboard-demo.png)
+
 
 
 
