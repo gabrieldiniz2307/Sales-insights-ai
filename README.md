@@ -15,7 +15,7 @@
 
 *Sistema profissional que combina FastAPI, LangChain e OpenAI GPT para análise inteligente de dados de vendas*
 
-![Demo](https://ibb.co/yBnSBfSx)
+(https://ibb.co/yBnSBfSx)
 
 </div>
 
