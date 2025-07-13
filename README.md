@@ -9,7 +9,7 @@
 [![LangChain](https://img.shields.io/badge/LangChain-0.0.350+-1C3C3C?style=for-the-badge&logo=chainlink&logoColor=white )](https://langchain.com )
 [![OpenAI](https://img.shields.io/badge/OpenAI-GPT--4-412991?style=for-the-badge&logo=openai&logoColor=white )](https://openai.com )
 
-**🚀 Desenvolvido por:** [João Gabriel de Araujo Diniz](https://github.com/joaogabriel )
+**🚀 Desenvolvido por:** [João Gabriel de Araujo Diniz](https://github.com/gabrieldiniz2307 )
 
 ---
 
