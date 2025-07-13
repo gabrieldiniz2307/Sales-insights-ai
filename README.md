@@ -11,9 +11,10 @@
 
 **🚀 Desenvolvido por:** [João Gabriel de Araujo Diniz](https://github.com/gabrieldiniz2307 )
 
----
 
 *Sistema profissional que combina FastAPI, LangChain e OpenAI GPT para análise inteligente de dados de vendas*
+
+---<img width="1890" height="908" alt="Captura de tela 2025-07-13 190521" src="https://github.com/user-attachments/assets/89cd8eac-8924-41ca-88a7-daf6a7c57848" />
 
 <div align="center">
   <img src="https://ibb.co/yBnSBfSx" alt="Sales Insights AI - Interface Principal" width="800"/>
