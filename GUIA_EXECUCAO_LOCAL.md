@@ -12,7 +12,7 @@ Antes de começar, certifique-se de ter instalado:
   - Durante a instalação, marque "Add Python to PATH"
 
 - **Git** (opcional, para clonar repositório)
-  - Download: https://git-scm.com/downloads
+  - Download: https://github.com/gabrieldiniz2307/Sales-insights-ai
 
 ### 2. BAIXAR O PROJETO
 
@@ -22,7 +22,7 @@ Antes de começar, certifique-se de ter instalado:
 
 #### Opção B: Git Clone
 ```bash
-git clone [URL_DO_SEU_REPOSITORIO]
+git clone [https://github.com/gabrieldiniz2307/Sales-insights-ai]
 cd sales_insights_ai
 ```
 
